@@ -16,7 +16,7 @@ import styles from "./music-screen.styles"
 export const MusicScreen: FC<StackScreenProps<NavigatorParamList, "music">> = observer(
   function MusicScreen({ navigation }) {
     const {
-      authStore: { fetchYoutubeMusicList },
+      authStore: { fetchYoutubeMusicList, fetchRickRoll },
     } = useStores()
 
     // const video = {
@@ -32,9 +32,11 @@ export const MusicScreen: FC<StackScreenProps<NavigatorParamList, "music">> = ob
       useCallback(() => {
         const init = async () => {
           const musicSearchResult = await fetchYoutubeMusicList()
+          const rickRollSearchResult = await fetchRickRoll()
           const musicList = musicSearchResult.map((vid: IYoutubeSearchResultsResponse) =>
             mapYoutubeSearchResultToList(vid),
           )
+          musicList.unshift(mapYoutubeSearchResultToList(rickRollSearchResult[0]))
           setMusicList(musicList)
           setVideosLoading(false)
         }

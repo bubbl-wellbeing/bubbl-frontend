@@ -114,6 +114,14 @@ export const AuthStoreModel = types
       )
       return kind === "ok" ? videosList : []
     }),
+    fetchRickRoll: flow(function* () {
+      const { kind, videosList } = yield self.environment.api.fetchYoutubeVideoList(
+        `
+        Rick Astley - Never Gonna Give You Up (Official Music Video)`,
+        1,
+      )
+      return kind === "ok" ? videosList : []
+    }),
   }))
 
 type AuthStoreType = Instance<typeof AuthStoreModel>

@@ -133,10 +133,10 @@ export class Api {
     }
   }
 
-  async fetchYoutubeVideoList(searchQuery: string): Promise<any> {
+  async fetchYoutubeVideoList(searchQuery: string, maxResults = 15): Promise<any> {
     try {
       const response: ApiResponse<any> = await this.apisauce.get(
-        `/search?part=snippet&key=${YOUTUBE_API_KEY}&type=video&q=${searchQuery}&maxResults=15`,
+        `/search?part=snippet&key=${YOUTUBE_API_KEY}&type=video&q=${searchQuery}&maxResults=${maxResults}`,
         {},
         { baseURL: YOUTUBE_API_BASE_URL },
       )
